@@ -4,9 +4,12 @@ class CpuPrices
 
 
     def initialize()
-        prices = makePrice
-        names = makeNames
-        @cpus = makeCpus(prices, names)                     
+        price_was = getPriceWas
+        shipping_price = getShipping
+
+        prices = getPrice
+        names = getNames
+        @cpus = makeCpus(prices, names, shipping_price, price_was)                     
     end #end initialize
 
 
@@ -39,7 +42,7 @@ class CpuPrices
                                                                                         # words that describe motherboards and/or 
                                                                                         # cooling products.
     end
-    def makePrice
+    def getPrice
         scraped_info = Scraper.new
         css_price = scraped_info.xml_obj.css ".price-current"    # This will set the variable equal to the
                                                             # html that contains what I need to find the price.
@@ -69,7 +72,7 @@ class CpuPrices
         end #end prices.each
         prices
     end
-    def makeNames
+    def getNames
         scraped = Scraper.new
         names = []                                          # Names will hold the names of 
                                                             # objects found on the page.
@@ -88,7 +91,30 @@ class CpuPrices
         end #end names.each_with_index
         names
     end
-    def makeCpus(prices, names)
+    def getPriceWas
+        scraped = Scraper.new
+        price_was = []                                          
+
+        css_price_was = scraped.xml_obj.css ".price-was-data"        
+
+        css_price_was.each do | name |
+            price_was << name.text
+        end
+
+            
+        price_was
+    end
+    def getShipping
+        scraped = Scraper.new
+        shipping = []
+        css_shipping = scraped.xml_obj.css ".price-ship"        
+
+        css_shipping.each do | name |
+            shipping << name.text
+        end
+        shipping
+    end
+    def makeCpus(prices, names, shipping, priceWas)
                                               
                                                             
         cpus = []                                                    
@@ -105,7 +131,7 @@ class CpuPrices
                                                             # with the coolers on the
                                                             # website.
 
-                cpus << Cpu.new(names[index], price)      
+                cpus << Cpu.new(names[index], price, priceWas[index], shipping[index])      
                                                             
             end #end if
         end #end prices.each_with_index

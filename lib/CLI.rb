@@ -12,7 +12,7 @@ class NeweggScraperChsbr::CLI
             get_init_data_for_user
             Cpu.display_cpu(@user)
             @user.choose_cpu
-            
+            Cpu.display_cpu_with_extras(@user)
             puts "If you would like to continue please enter : #{@counter}"
             @counter = gets.strip
         end
