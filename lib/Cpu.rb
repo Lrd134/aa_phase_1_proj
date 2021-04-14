@@ -1,11 +1,11 @@
 require_relative '../config/environment.rb'
 class Cpu
-    attr_reader :name, :price, :price_was, :shipping
+    attr_reader :name, :price, :ratings, :shipping
     @@all = []
-    def initialize(name, price, priceWas, shipping)
+    def initialize(name, price, shipping, ratings)
         @name = CpuName.new(name)
         @price = Price.new(price)
-        @price_was = priceWas
+        @ratings = ratings
         @shipping = shipping
         @@all << self
     end
@@ -43,6 +43,6 @@ class Cpu
         binding.pry
         user.chosen_cpu.each do | chosen_cpu |
             @@all[user.chosen_cpu - 1] 
-
+        end
     end
 end

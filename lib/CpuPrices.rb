@@ -4,12 +4,10 @@ class CpuPrices
 
 
     def initialize()
-        price_was = getPriceWas
         shipping_price = getShipping
-
         prices = getPrice
         names = getNames
-        @cpus = makeCpus(prices, names, shipping_price, price_was)                     
+        @cpus = makeCpus(prices, names, shipping_price, numberOfRates)                     
     end #end initialize
 
 
@@ -90,20 +88,7 @@ class CpuPrices
                                                             # html object into the names array.
         end #end names.each_with_index
         names
-    end
-    def getPriceWas
-        scraped = Scraper.new
-        price_was = []                                          
-
-        css_price_was = scraped.xml_obj.css ".price-was-data"        
-
-        css_price_was.each do | name |
-            price_was << name.text
-        end
-
-            
-        price_was
-    end
+    end.
     def getShipping
         scraped = Scraper.new
         shipping = []
@@ -114,7 +99,7 @@ class CpuPrices
         end
         shipping
     end
-    def makeCpus(prices, names, shipping, priceWas)
+    def makeCpus(prices, names, shipping, ratings)
                                               
                                                             
         cpus = []                                                    
@@ -131,7 +116,7 @@ class CpuPrices
                                                             # with the coolers on the
                                                             # website.
 
-                cpus << Cpu.new(names[index], price, priceWas[index], shipping[index])      
+                cpus << Cpu.new(names[index], price, shipping[index], ratings[index])      
                                                             
             end #end if
         end #end prices.each_with_index
