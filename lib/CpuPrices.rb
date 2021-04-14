@@ -7,7 +7,7 @@ class CpuPrices
         shipping_price = getShipping
         prices = getPrice
         names = getNames
-        @cpus = makeCpus(prices, names, shipping_price, numberOfRates)                     
+        @cpus = makeCpus(prices, names, shipping_price)                     
     end #end initialize
 
 
@@ -88,7 +88,7 @@ class CpuPrices
                                                             # html object into the names array.
         end #end names.each_with_index
         names
-    end.
+    end
     def getShipping
         scraped = Scraper.new
         shipping = []
@@ -99,7 +99,7 @@ class CpuPrices
         end
         shipping
     end
-    def makeCpus(prices, names, shipping, ratings)
+    def makeCpus(prices, names, shipping)
                                               
                                                             
         cpus = []                                                    
@@ -116,7 +116,7 @@ class CpuPrices
                                                             # with the coolers on the
                                                             # website.
 
-                cpus << Cpu.new(names[index], price, shipping[index], ratings[index])      
+                cpus << Cpu.new(names[index], price, shipping[index])      
                                                             
             end #end if
         end #end prices.each_with_index
