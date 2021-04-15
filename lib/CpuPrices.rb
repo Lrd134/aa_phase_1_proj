@@ -7,10 +7,16 @@ class CpuPrices
         shipping_price = getShipping
         prices = getPrice
         names = getNames
+        getCpuPages
         @cpus = makeCpus(prices, names, shipping_price)                     
     end #end initialize
 
+    def getCpuPages
+        scraped = Scraper.new
+        css_next_link = scraped_info.xml_obj.css ".price-current > a.href" 
+        binding.pry
 
+    end
     def split_price(html_element)               # This method checks each individual text element, this is to make sure the prices are accurate.
         counter = 0
         until counter == 100  
