@@ -1,5 +1,5 @@
 require_relative '../config/environment.rb'
-class CpuPrices
+class NeweggScraperChsbr::CpuPrices
     attr_reader :cpus
 
 
@@ -12,7 +12,7 @@ class CpuPrices
     end #end initialize
 
     def getCpuDesc
-        scraped = Scraper.new
+        scraped = NeweggScraperChsbr::Scraper.new
         pages = []
         description = []
         css_next_link = scraped.xml_obj.css  ".item-title"
@@ -26,7 +26,7 @@ class CpuPrices
         puts "Getting data.. Please wait.\n"
         pages.each_with_index do | url, index_of_pages |
             description[index_of_pages] = {}
-            scraped_info = Scraper.new(url)
+            scraped_info = NeweggScraperChsbr::Scraper.new(url)
             descriptors = scraped_info.xml_obj.css(".product-bullets")
             descriptors.children.children.each do |info |
                 info.children.each do | more_info |
@@ -74,7 +74,7 @@ class CpuPrices
                                                                                         # cooling products.
     end
     def getPrice
-        scraped_info = Scraper.new
+        scraped_info = NeweggScraperChsbr::Scraper.new
         css_price = scraped_info.xml_obj.css ".price-current"    # This will set the variable equal to the
                                                             # html that contains what I need to find the price.
 
@@ -104,7 +104,7 @@ class CpuPrices
         prices
     end
     def getNames
-        scraped = Scraper.new
+        scraped = NeweggScraperChsbr::Scraper.new
         names = []                                          # Names will hold the names of 
                                                             # objects found on the page.
 
@@ -123,7 +123,7 @@ class CpuPrices
         names
     end
     def getShipping
-        scraped = Scraper.new
+        scraped = NeweggScraperChsbr::Scraper.new
         shipping = []
         css_shipping = scraped.xml_obj.css ".price-ship"        
 
@@ -149,7 +149,7 @@ class CpuPrices
                                                             # with the coolers on the
                                                             # website.
                 
-                cpus << Cpu.new(names[index], price, shipping[index], desc_hash[index])      
+                cpus << NeweggScraperChsbr::Cpu.new(names[index], price, shipping[index], desc_hash[index])      
                                                             
             end #end if
         end #end prices.each_with_index

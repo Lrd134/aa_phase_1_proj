@@ -1,5 +1,5 @@
 require_relative '../config/environment.rb'
-class Price
+class NeweggScraperChsbr::Price
     attr_accessor :price
     
     def initialize(price)

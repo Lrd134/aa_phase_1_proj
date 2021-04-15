@@ -2,7 +2,7 @@ require_relative '../config/environment.rb'
 class NeweggScraperChsbr::CLI
     attr_reader :user
     def initialize
-        CpuPrices.new
+        NeweggScraperChsbr::CpuPrices.new
     end
     def start
         puts "Hello! I heard you were interested in purchasing some CPU's."
@@ -10,9 +10,9 @@ class NeweggScraperChsbr::CLI
         @counter = gets.strip
         while @counter == 'y' do
             get_init_data_for_user
-            Cpu.display_cpu(@user)
+            NeweggScraperChsbr::Cpu.display_cpu(@user)
             @user.choose_cpu
-            Cpu.display_cpu_with_extras(@user)
+            NeweggScraperChsbr::Cpu.display_cpu_with_extras(@user)
             puts "If you would like to continue please enter : #{@counter}"
             @counter = gets.strip
         end
@@ -26,7 +26,7 @@ class NeweggScraperChsbr::CLI
             puts "Please put i for Intel, or a for AMD."
             puts "Please put x for either."
             @cpu_make = gets.strip
-            puts "\n\nYou want to search for (an) #{Cpu.cpu_maker(@cpu_make)} CPU."
+            puts "\n\nYou want to search for (an) #{NeweggScraperChsbr::Cpu.cpu_maker(@cpu_make)} CPU."
             if @max_price.to_i != 0 && @min_price.to_i != 0
                 puts "You entered a maximum price of $#{@max_price}, and a minimum price of $#{@min_price}."
             elsif @max_price.to_i != 0
@@ -43,7 +43,7 @@ class NeweggScraperChsbr::CLI
         puts "\n  IF this data is correct please enter y"
         @counter = gets.strip
         if @counter == 'y'
-            @user = User.new(@cpu_make, @min_price, @max_price)
+            @user = NeweggScraperChsbr::User.new(@cpu_make, @min_price, @max_price)
         else
             get_init_data_for_user
         end
