@@ -1,8 +1,8 @@
-require_relative '../config/environment.rb'
+
 class NeweggScraperChsbr::CLI
     attr_reader :user
     def initialize
-        NeweggScraperChsbr::CpuPrices.new
+        NeweggScraperChsbr::DataGrabber.new
     end
     def start
         puts "Hello! I heard you were interested in purchasing some CPU's."

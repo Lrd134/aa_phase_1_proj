@@ -1,5 +1,5 @@
-require_relative '../config/environment.rb'
-class NeweggScraperChsbr::CpuPrices
+
+class NeweggScraperChsbr::DataGrabber
     attr_reader :cpus
 
 

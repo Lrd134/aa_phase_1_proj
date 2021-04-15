@@ -1,4 +1,4 @@
-require_relative '../config/environment.rb'
+
 
 class NeweggScraperChsbr::Scraper
     attr_reader :xml_obj

@@ -1,0 +1,3 @@
+class NeweggScraperChsbr::Descriptors
+    
+end 
