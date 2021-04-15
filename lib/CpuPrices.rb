@@ -7,8 +7,8 @@ class CpuPrices
         shipping_price = getShipping
         prices = getPrice
         names = getNames
-        getCpuDesc
-        @cpus = makeCpus(prices, names, shipping_price)                     
+        descHash = getCpuDesc
+        @cpus = makeCpus(prices, names, shipping_price, descHash)                     
     end #end initialize
 
     def getCpuDesc
@@ -23,24 +23,24 @@ class CpuPrices
         end
         description = {}
         counter = 1
+        puts "Getting data.. Please wait.\n"
         pages.each_with_index do | url, index_of_pages |
-            description[(index_of_pages)] = {}
+            description[index_of_pages] = {}
             scraped_info = Scraper.new(url)
             descriptors = scraped_info.xml_obj.css(".product-bullets")
             descriptors.children.children.each do |info |
                 info.children.each do | more_info |
                     
-                    description[index_of_pages + 1][counter] = more_info.text
-                    counter += 1
-                    binding.pry
-                end
-                
+                    description[index_of_pages][counter] = more_info.text
+                    counter += 1 
+                end 
             end
             counter = 0
             
         end
+        puts "Done!\n"
         description
-        binding.pry
+        
 
 
     end
@@ -132,7 +132,7 @@ class CpuPrices
         end
         shipping
     end
-    def makeCpus(prices, names, shipping)
+    def makeCpus(prices, names, shipping, desc_hash)
                                               
                                                             
         cpus = []                                                    
@@ -148,8 +148,8 @@ class CpuPrices
                                                             # there is a price associated
                                                             # with the coolers on the
                                                             # website.
-
-                cpus << Cpu.new(names[index], price, shipping[index])      
+                
+                cpus << Cpu.new(names[index], price, shipping[index], desc_hash[index])      
                                                             
             end #end if
         end #end prices.each_with_index

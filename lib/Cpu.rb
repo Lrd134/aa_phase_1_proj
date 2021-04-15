@@ -1,11 +1,11 @@
 require_relative '../config/environment.rb'
 class Cpu
-    attr_reader :name, :price, :ratings, :shipping
+    attr_reader :name, :price, :desc, :shipping
     @@all = []
-    def initialize(name, price, shipping)
+    def initialize(name, price, shipping, desc)
         @name = CpuName.new(name)
         @price = Price.new(price)
-        
+        @desc = desc
         @shipping = shipping
         @@all << self
     end
@@ -42,7 +42,13 @@ class Cpu
     def self.display_cpu_with_extras(user)
         
         user.chosen_cpu.each do | chosen_cpu |
-            puts "\n\n\n#{@@all[chosen_cpu - 1].name.name}\nHas a price of: #{@@all[chosen_cpu - 1].price.price}\nShipping: #{@@all[chosen_cpu - 1].shipping}"
+            puts "\n\n\n#{@@all[chosen_cpu - 1].name.name}\nHas a price of: #{@@all[chosen_cpu - 1].price.price}\nShipping: #{@@all[chosen_cpu - 1].shipping}\n\n   Descriptive Points:\n#{@@all[chosen_cpu - 1].printDesc}"
         end
     end
+    def printDesc
+        @desc.each do | key, value |
+            puts "          #{key + 1}: #{value}"
+        end
+    end
+
 end
