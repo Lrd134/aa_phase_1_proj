@@ -12,6 +12,7 @@ GEM
       racc (~> 1.4)
     open-uri (0.1.0)
     racc (1.5.2)
+    rake (13.0.3)
 
 PLATFORMS
   x86_64-linux
@@ -20,6 +21,7 @@ DEPENDENCIES
   newegg_scraper_chsbr!
   nokogiri
   open-uri
+  rake (~> 13.0)
 
 BUNDLED WITH
    2.2.13
