@@ -1,10 +1,10 @@
 require_relative '../config/environment.rb'
-class Cpu
+class NeweggScraperChsbr::Cpu
     attr_reader :name, :price, :desc, :shipping
     @@all = []
     def initialize(name, price, shipping, desc)
-        @name = CpuName.new(name)
-        @price = Price.new(price)
+        @name = NeweggScraperChsbr::CpuName.new(name)
+        @price = NeweggScraperChsbr::Price.new(price)
         @desc = desc
         @shipping = shipping
         @@all << self
@@ -24,13 +24,15 @@ class Cpu
     def self.display_cpu(user)
         counter = 1
         @@all.each do | computer |
-            
-            if user.max_price.to_i == 0 && user.min_price.to_i == 0 && (Cpu.cpu_maker(user.cpu_make) == "Intel" || Cpu.cpu_maker(user.cpu_make) == "AMD")
-                computer.name.name.include?(Cpu.cpu_maker(user.cpu_make)) ? puts("\n  #{counter}:\n     Name: #{computer.name.name}\n     Price: #{computer.price.price}") : nil
+            if user.max_price.to_i != 0 && user.min_price.to_i == 0
+                user.min_price = "1"
+            end
+            if user.max_price.to_i == 0 && user.min_price.to_i == 0 && (NeweggScraperChsbr::Cpu.cpu_maker(user.cpu_make) == "Intel" || NeweggScraperChsbr::Cpu.cpu_maker(user.cpu_make) == "AMD")
+                computer.name.name.include?(NeweggScraperChsbr::Cpu.cpu_maker(user.cpu_make)) ? puts("\n  #{counter}:\n     Name: #{computer.name.name}\n     Price: #{computer.price.price}") : nil
             elsif user.max_price.to_i == 0 && user.min_price.to_i == 0 && user.cpu_make == 'x'
                 puts("\n  #{counter}:\n     Name: #{computer.name.name}\n     Price: #{computer.price.price}")
-            elsif user.max_price.to_i >= computer.price.convert_price && user.min_price.to_i <= computer.price.convert_price && (Cpu.cpu_maker(user.cpu_make) == "Intel" || Cpu.cpu_maker(user.cpu_make) == "AMD")
-                computer.name.name.include?(Cpu.cpu_maker(user.cpu_make)) ? puts("\n  #{counter}:\n     Name: #{computer.name.name}\n     Price: #{computer.price.price}") : nil
+            elsif user.max_price.to_i >= computer.price.convert_price && user.min_price.to_i <= computer.price.convert_price && (NeweggScraperChsbr::Cpu.cpu_maker(user.cpu_make) == "Intel" || NeweggScraperChsbr::Cpu.cpu_maker(user.cpu_make) == "AMD")
+                computer.name.name.include?(NeweggScraperChsbr::Cpu.cpu_maker(user.cpu_make)) ? puts("\n  #{counter}:\n     Name: #{computer.name.name}\n     Price: #{computer.price.price}") : nil
             
             elsif user.max_price.to_i >= computer.price.convert_price && user.min_price.to_i <= computer.price.convert_price && user.cpu_make == 'x'
                 puts("\n  #{counter}:\n     Name: #{computer.name.name}\n     Price: #{computer.price.price}")
@@ -42,7 +44,8 @@ class Cpu
     def self.display_cpu_with_extras(user)
         
         user.chosen_cpu.each do | chosen_cpu |
-            puts "\n\n\n#{@@all[chosen_cpu - 1].name.name}\nHas a price of: #{@@all[chosen_cpu - 1].price.price}\nShipping: #{@@all[chosen_cpu - 1].shipping}\n\n   Descriptive Points:\n#{@@all[chosen_cpu - 1].printDesc}"
+            puts "\n\n\n#{@@all[chosen_cpu - 1].name.name}\nHas a price of: #{@@all[chosen_cpu - 1].price.price}\nShipping: #{@@all[chosen_cpu - 1].shipping}\n\n   Descriptive Points:\n"
+            @@all[chosen_cpu - 1].printDesc
         end
     end
     def printDesc

@@ -1,7 +1,8 @@
 
 require 'open-uri'
 require 'nokogiri'
-require 'pry'
+
+require "bundler/setup"
 require_relative "../lib/newegg_scraper_chsbr/version"
 require_relative '../lib/CpuPrices.rb'
 require_relative '../lib/Scraper.rb'

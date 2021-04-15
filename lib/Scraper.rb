@@ -1,6 +1,6 @@
 require_relative '../config/environment.rb'
 
-class Scraper
+class NeweggScraperChsbr::Scraper
     attr_reader :xml_obj
     
     URL = "https://www.newegg.com/p/pl?d=cpu"

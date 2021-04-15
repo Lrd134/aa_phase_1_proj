@@ -1,6 +1,6 @@
 require_relative '../config/environment.rb'
 
-class CpuName
+class NeweggScraperChsbr::CpuName
     attr_accessor :name
     # @@all = []
     def initialize(name)

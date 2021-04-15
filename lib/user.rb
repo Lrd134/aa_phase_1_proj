@@ -1,5 +1,5 @@
 require_relative '../config/environment.rb'
-class User
+class NeweggScraperChsbr::User
     attr_accessor :cpu_make, :min_price, :max_price, :chosen_cpu
     def initialize(cpu_make = 'x', min_price = 0, max_price = 0)
         @cpu_make = cpu_make
