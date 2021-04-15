@@ -7,14 +7,41 @@ class CpuPrices
         shipping_price = getShipping
         prices = getPrice
         names = getNames
-        getCpuPages
+        getCpuDesc
         @cpus = makeCpus(prices, names, shipping_price)                     
     end #end initialize
 
-    def getCpuPages
+    def getCpuDesc
         scraped = Scraper.new
-        css_next_link = scraped_info.xml_obj.css ".price-current > a.href" 
+        pages = []
+        description = []
+        css_next_link = scraped.xml_obj.css  ".item-title"
+        css_next_link.each_with_index do | element, index |
+            if index != 0
+                pages << element.attributes["href"].value
+            end
+        end
+        description = {}
+        counter = 1
+        pages.each_with_index do | url, index_of_pages |
+            description[(index_of_pages)] = {}
+            scraped_info = Scraper.new(url)
+            descriptors = scraped_info.xml_obj.css(".product-bullets")
+            descriptors.children.children.each do |info |
+                info.children.each do | more_info |
+                    
+                    description[index_of_pages + 1][counter] = more_info.text
+                    counter += 1
+                    binding.pry
+                end
+                
+            end
+            counter = 0
+            
+        end
+        description
         binding.pry
+
 
     end
     def split_price(html_element)               # This method checks each individual text element, this is to make sure the prices are accurate.
