@@ -5,8 +5,8 @@ class NeweggScraperChsbr::CLI
         NeweggScraperChsbr::DataGrabber.new
     end
     def start
-        puts "Hello! I heard you were interested in purchasing some CPU's."
-        puts "Please enter y to browse."
+        puts "Were you interested in purchasing some CPU's?"
+        puts "Please enter y to do so."
         @counter = gets.strip
         while @counter == 'y' do
             get_init_data_for_user
@@ -40,7 +40,7 @@ class NeweggScraperChsbr::CLI
         end
     end
     def if_correct_info
-        puts "\n  IF this data is correct please enter y"
+        puts "\nIf you're satisfied with your selection, the computer will print\na list of CPUs that satisfy the criteria. Enter y to continue."
         @counter = gets.strip
         if @counter == 'y'
             @user = NeweggScraperChsbr::User.new(@cpu_make, @min_price, @max_price)
@@ -49,7 +49,7 @@ class NeweggScraperChsbr::CLI
         end
     end
     def get_price_range
-        puts "Hello! Would you like to set a budget? If no, set your maximum budget to 0"
+        puts "Welcome. Would you like to set a budget? If no, set your maximum budget to 0"
             puts "Please enter the integer value of your maximum price."
             puts "$500.50, please enter as 501, or 500 to stay below budget."        
             @max_price = gets.strip
