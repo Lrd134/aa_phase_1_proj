@@ -5,7 +5,7 @@ class NeweggScraperChsbr::Cpu
     def initialize(name, price, shipping, desc)
         @name = NeweggScraperChsbr::Name.new(name)
         @price = NeweggScraperChsbr::Price.new(price)
-        @desc = desc
+        @desc = NeweggScraperChsbr::Descriptors.new(desc)
         @shipping = shipping
         @@all << self
     end
