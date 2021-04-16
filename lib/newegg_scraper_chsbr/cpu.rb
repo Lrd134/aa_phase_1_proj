@@ -59,7 +59,7 @@ class NeweggScraperChsbr::Cpu
         end
     end
     def printDesc
-        @desc.each do | key, value |
+        @desc.bullets.each do | key, value |
             puts "          #{key + 1}: #{value}"
         end
     end
