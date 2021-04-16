@@ -25,7 +25,7 @@ class NeweggScraperChsbr::Cpu
         counter = 1
         @@all.each do | computer |
             if user.max_price.to_i != 0 && user.min_price.to_i == 0
-                binding.pry
+                
 
                 user.min_price = "1"
             end
