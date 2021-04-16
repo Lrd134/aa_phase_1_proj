@@ -13,7 +13,7 @@ class NeweggScraperChsbr::CLI
             NeweggScraperChsbr::Cpu.display_cpu(@user)
             @user.choose_cpu
             NeweggScraperChsbr::Cpu.display_cpu_with_extras(@user)
-            puts "If you would like to continue please enter : #{@counter}"
+            puts "If you would like to continue please enter : #{@counter}.\nTo exit type n or exit."
             @counter = gets.strip
         end
         puts "Thanks for using Chesbro's Scraper!"
@@ -55,17 +55,21 @@ class NeweggScraperChsbr::CLI
         end
     end
     def get_price_range
-        puts "Welcome. Would you like to set a budget? If no, set your maximum budget to 0"
+        # puts "Welcome. Would you like to set a budget? If no, set your maximum budget to 0"
+        # puts "Please enter the integer value of your maximum price."
+        # puts "$500.50, please enter as 501, or 500 to stay below budget."        
+        # @max_price = gets.strip
+        while @max_price.to_i < 0  || @max_price.to_i > 10000 || @max_price.include?("$") || @max_price.include?(".") || @max_price == nil
+            puts "Welcome. Would you like to set a budget? If no, set your maximum budget to 0"
             puts "Please enter the integer value of your maximum price."
             puts "$500.50, please enter as 501, or 500 to stay below budget."        
             @max_price = gets.strip
-            if @max_price.to_i == 0
-                @min_price = "0"
-            else
-                puts "Please enter the minimum you would spend on a CPU."
-                puts "Please use the same format as above."
-                @min_price = gets.strip
-            end
+        end
+        while @min_price.to_i < 0  || @min_price.to_i > @max_price.to_i || @min_price.include?("$") || @min_price.include?(".") || @min_price == nil
+            puts "Please enter the minimum you would spend on a CPU."
+            puts "Please use the same format as above."
+            @min_price = gets.strip
+        end
         
     end
 
