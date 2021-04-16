@@ -4,7 +4,7 @@ class NeweggScraperChsbr::CLI
     def initialize
         NeweggScraperChsbr::DataGrabber.new
     end
-    def start
+    def call
         puts "Were you interested in purchasing some CPU's?"
         puts "Please enter y to do so."
         @counter = gets.strip
