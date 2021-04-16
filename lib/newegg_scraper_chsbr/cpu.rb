@@ -6,7 +6,7 @@ class NeweggScraperChsbr::Cpu
         @name = NeweggScraperChsbr::Name.new(name)
         @price = NeweggScraperChsbr::Price.new(price)
         @desc = NeweggScraperChsbr::Descriptors.new(desc)
-        @shipping = shipping
+        @shipping = NewEggScraperChsbr::Shipping.new(shipping)
         @@all << self
     end
     def self.all
@@ -54,7 +54,7 @@ class NeweggScraperChsbr::Cpu
     def self.display_cpu_with_extras(user)
         
         user.chosen_cpu.each do | chosen_cpu |
-            puts "\n\n\n#{@@all[chosen_cpu - 1].name.name}\nHas a price of: #{@@all[chosen_cpu - 1].price.price}\nShipping: #{@@all[chosen_cpu - 1].shipping}\n\n   Descriptive Points:\n"
+            puts "\n\n\n#{@@all[chosen_cpu - 1].name.name}\nHas a price of: #{@@all[chosen_cpu - 1].price.price}\nShipping: #{@@all[chosen_cpu - 1].shipping.price}\n\n   Descriptive Points:\n"
             @@all[chosen_cpu - 1].printDesc
         end
     end
