@@ -8,7 +8,7 @@ class NeweggScraperChsbr::CLI
         puts "Were you interested in purchasing some CPU's?"
         puts "Please enter y to do so."
         @counter = gets.strip
-        while @counter == 'y' do
+        while @counter == 'y'
             get_init_data_for_user
             NeweggScraperChsbr::Cpu.display_cpu(@user)
             @user.choose_cpu
@@ -26,6 +26,12 @@ class NeweggScraperChsbr::CLI
             puts "Please put i for Intel, or a for AMD."
             puts "Please put x for either."
             @cpu_make = gets.strip
+            while @cpu_make != "x" || @cpu_make != "a" || @cpu_make != "i"
+                puts "Are you searching for Intel or AMD?"
+                puts "Please put i for Intel, or a for AMD."
+                puts "Please put x for either."
+                @cpu_make = gets.strip
+            end
             puts "\n\nYou want to search for (an) #{NeweggScraperChsbr::Cpu.cpu_maker(@cpu_make)} CPU."
             if @max_price.to_i != 0 && @min_price.to_i != 0
                 puts "You entered a maximum price of $#{@max_price}, and a minimum price of $#{@min_price}."
