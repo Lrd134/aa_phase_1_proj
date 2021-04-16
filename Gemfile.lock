@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    newegg_scraper_chsbr (0.1.0)
+    newegg_scraper_chsbr (0.1.1)
       nokogiri
       open-uri
 
@@ -19,8 +19,8 @@ PLATFORMS
 
 DEPENDENCIES
   newegg_scraper_chsbr!
-  nokogiri
-  open-uri
+  nokogiri (~> 1.11.3)
+  open-uri (~> 0.1)
   rake (~> 13.0)
 
 BUNDLED WITH
