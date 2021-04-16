@@ -6,7 +6,7 @@ class NeweggScraperChsbr::Cpu
         @name = NeweggScraperChsbr::Name.new(name)
         @price = NeweggScraperChsbr::Price.new(price)
         @desc = NeweggScraperChsbr::Descriptors.new(desc)
-        @shipping = NewEggScraperChsbr::Shipping.new(shipping)
+        @shipping = NeweggScraperChsbr::Shipping.new(shipping)
         @@all << self
     end
     def self.all
