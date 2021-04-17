@@ -11,7 +11,7 @@ To install the gem.
 1) Run gem install newegg_scraper_chsbr
 
 
-1.2) To be sure you have the latest stable build Run gem install newegg_scraper_chsbr -v 0.2.0
+1.2) To be sure you have the latest stable build Run gem install newegg_scraper_chsbr -v 0.2.1
 
 
 2)Now type newegg_scraper into the terminal and the program should run.
