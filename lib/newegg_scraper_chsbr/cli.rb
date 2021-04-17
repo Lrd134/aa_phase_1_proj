@@ -44,7 +44,6 @@ class NeweggScraperChsbr::CLI
             @cpu_make = gets.strip
             not_found = cpu_make_bool
             while not_found
-                puts "\n\n\n\n THIS IS CPU_MAKE: #{@cpu_make}\n\n\n IS THIS TRUE?: #{!@cpu_make.include?("x") || !@cpu_make.include?("a") || !@cpu_make.include?("i") || @cpu_make == nil }\n"
                 puts "Are you searching for Intel or AMD?"
                 puts "Please put i for Intel, or a for AMD."
                 puts "Please put x for either."
