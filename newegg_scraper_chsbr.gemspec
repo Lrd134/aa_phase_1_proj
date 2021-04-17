@@ -29,8 +29,8 @@ Gem::Specification.new do |spec|
 
   # Uncomment to register a new dependency of your gem
 
-  spec.add_dependency "nokogiri"
-  spec.add_dependency "open-uri"
+  spec.add_dependency "nokogiri", "~> 1.11.3"
+  spec.add_dependency "open-uri", "~> 0.1"
 
   # For more information and examples about making a new gem, checkout our
   # guide at: https://bundler.io/guides/creating_gem.html
