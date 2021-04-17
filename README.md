@@ -6,21 +6,42 @@ You shouldn't be able to break the program with any weird numbers when prompted,
 
 ## Installation
     
+    
 To install the gem.
 1) Run gem install newegg_scraper_chsbr
+
+
 1.2) To be sure you have the latest stable build Run gem install newegg_scraper_chsbr -v 0.2.0
+
+
 2)Now type newegg_scraper into the terminal and the program should run.
+
 
 
 To install from Github. 
 1)Copy the link from github. See [Cloning Docs](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository)
-2)Run git clone "ssh:github.com/lrd/aaphase1repo" in the command line.
+
+
+2)Run the code below in the command line.
+
+    git clone "ssh:github.com/lrd/aaphase1repo"
+
+
+
 3)Navigate to the installed directory and run bundle install to install necessary dependencies.
+
+
 4)Now type newegg_scraper into the terminal after bundling!
+
+
+
+
 
 ## Usage
 
-    This program is intended to be used by someone who is looking to buy a computer. This program will get some data from Newegg.com and then it will parse it. The program will     display that data nicely to the user. The program will then make the user choose one or some of the CPU's listed, and then display more information about the CPU(s) chosen.
+This program is intended to be used by someone who is looking to buy a computer. This program will get some data from Newegg.com and then it will parse it.
+The program will display that data nicely to the user.
+The program will then make the user choose one or some of the CPU's listed, and then display more information about the CPU(s) chosen.
 
 
 ## Contributing
