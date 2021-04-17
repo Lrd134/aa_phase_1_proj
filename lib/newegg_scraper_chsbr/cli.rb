@@ -85,15 +85,17 @@ class NeweggScraperChsbr::CLI
             puts "$500.50, please enter as 501, or 500 to stay below budget."        
             @max_price = gets.strip
         end
-        puts "Please enter the minimum you would spend on a CPU."
-        puts "Please use the same format as above."
-        @min_price = gets.strip
-        while @min_price.to_i <= 0  || @min_price.to_i >= @max_price.to_i || @min_price.include?("$") || @min_price.include?(".") || @min_price == nil
+        if @max_price.to_i != 0
             puts "Please enter the minimum you would spend on a CPU."
             puts "Please use the same format as above."
             @min_price = gets.strip
+            
+            while @min_price.to_i <= 0  || @min_price.to_i >= @max_price.to_i || @min_price.include?("$") || @min_price.include?(".") || @min_price == nil
+                puts "Please enter the minimum you would spend on a CPU."
+                puts "Please use the same format as above."
+                @min_price = gets.strip
+            end
         end
-        
     end
     def control_bool
         if @counter.include?("y")
