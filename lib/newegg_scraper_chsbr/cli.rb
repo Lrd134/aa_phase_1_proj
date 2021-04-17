@@ -21,7 +21,7 @@ class NeweggScraperChsbr::CLI
             NeweggScraperChsbr::Cpu.display_cpu(@user)
             @user.choose_cpu
             NeweggScraperChsbr::Cpu.display_cpu_with_extras(@user)
-            puts "If you would like to continue please enter : #{@counter}.\nTo exit type n or exit."
+            puts "If you would like to restart the program please enter : #{@counter}.\nTo exit type n or exit."
             @counter = gets.strip
             corr_input = control_bool
             while corr_input
