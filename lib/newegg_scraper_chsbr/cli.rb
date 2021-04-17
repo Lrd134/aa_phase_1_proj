@@ -109,10 +109,13 @@ class NeweggScraperChsbr::CLI
     end
     def cpu_make_bool
         if @cpu_make.include?("x")
+            @cpu_make = "x"
             false
         elsif @cpu_make.include?("a")
+            @cpu_make = "a"
             false
         elsif @cpu_make.include?("i")
+            @cpu_make = "i"
             false
         else
             true
