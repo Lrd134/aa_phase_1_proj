@@ -8,11 +8,12 @@ class NeweggScraperChsbr::User
         @chosen_cpu = []
     end
     def choose_cpu
-        puts "Please enter the number of the CPU you'd like to choose."
+        puts "Please enter the number of the CPU you'd like to see more about."
         chosen = gets.strip.to_i
         @chosen_cpu << chosen
-        puts "Would you like to add another CPU?\nEnter y to do so."
-        if gets.strip == 'y'
+        puts "Would you like to see more about another CPU?\nEnter y to do so.\nEnter n to see details about the chosen CPU(s)"
+            input = gets.strip
+        if input == 'y'
             choose_cpu
         end
         
