@@ -1,4 +1,3 @@
-
 class NeweggScraperChsbr::CLI
     attr_reader :user
     def initialize
@@ -18,8 +17,12 @@ class NeweggScraperChsbr::CLI
         while @counter == 'y'
             get_price_range
             get_init_data_for_user
-            NeweggScraperChsbr::Cpu.display_cpu(@user)
-            @user.choose_cpu
+            printed_cpus = NeweggScraperChsbr::Cpu.display_cpu(@user)
+
+
+            @user.choose_cpu(printed_cpus)
+    
+            
             NeweggScraperChsbr::Cpu.display_cpu_with_extras(@user)
             puts "If you would like to restart the program please enter : #{@counter}.\nTo exit type n or exit."
             @counter = gets.strip

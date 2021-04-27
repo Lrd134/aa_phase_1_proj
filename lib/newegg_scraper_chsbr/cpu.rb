@@ -23,6 +23,7 @@ class NeweggScraperChsbr::Cpu
     end
     def self.display_cpu(user) 
         counter = 1
+        printed_cpus = []
         @@all.each do | computer |
             if user.max_price.to_i != 0 && user.min_price.to_i == 0
                 
@@ -32,23 +33,40 @@ class NeweggScraperChsbr::Cpu
             if user.max_price.to_i == 0 &&
                 user.min_price.to_i == 0 &&
                 (NeweggScraperChsbr::Cpu.cpu_maker(user.cpu_make) == "Intel" || NeweggScraperChsbr::Cpu.cpu_maker(user.cpu_make) == "AMD")
-                    computer.name.name.include?(NeweggScraperChsbr::Cpu.cpu_maker(user.cpu_make)) ? puts("\n  #{counter}:\n     Name: #{computer.name.name}\n     Price: #{computer.price.price}") : nil
-            elsif user.max_price.to_i == 0 &&
-                user.min_price.to_i == 0 &&
-                user.cpu_make == 'x'
+                    if computer.name.name.include?(NeweggScraperChsbr::Cpu.cpu_maker(user.cpu_make))
+                        puts("\n  #{counter}:\n     Name: #{computer.name.name}\n     Price: #{computer.price.price}")
+                        printed_cpus << counter
+                    else
+                        nil
+                    end
+            elsif user.max_price.to_i == 0 && user.min_price.to_i == 0 && user.cpu_make == 'x'
+                    
                     puts("\n   #{counter}:\n     Name: #{computer.name.name}\n     Price: #{computer.price.price}")
+                    printed_cpus << counter
             elsif user.max_price.to_i >= computer.price.convert_price &&
                 user.min_price.to_i <= computer.price.convert_price &&
                 (NeweggScraperChsbr::Cpu.cpu_maker(user.cpu_make) == "Intel" || NeweggScraperChsbr::Cpu.cpu_maker(user.cpu_make) == "AMD")
-                    computer.name.name.include?(NeweggScraperChsbr::Cpu.cpu_maker(user.cpu_make)) ? puts("\n  #{counter}:\n     Name: #{computer.name.name}\n     Price: #{computer.price.price}") : nil
+                    if computer.name.name.include?(NeweggScraperChsbr::Cpu.cpu_maker(user.cpu_make)) 
+                        puts("\n  #{counter}:\n     Name: #{computer.name.name}\n     Price: #{computer.price.price}")
+                        printed_cpus << counter
+                    else
+                        nil
+                    end
             
             elsif user.max_price.to_i >= computer.price.convert_price &&
                 user.min_price.to_i <= computer.price.convert_price &&
                 user.cpu_make == 'x'
                     puts("\n  #{counter}:\n     Name: #{computer.name.name}\n     Price: #{computer.price.price}")
+                    printed_cpus << counter
+
+            elsif printed_cpus.size == 0
+                puts "You did not match any CPU criteria."
             end
+
             counter += 1
+            
         end
+        printed_cpus
 
     end
     def self.display_cpu_with_extras(user)
