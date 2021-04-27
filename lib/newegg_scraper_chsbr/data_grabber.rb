@@ -1,4 +1,3 @@
-
 class NeweggScraperChsbr::DataGrabber
     attr_reader :cpus
 
@@ -9,7 +8,7 @@ class NeweggScraperChsbr::DataGrabber
         names = getNames
         descHash = getCpuDesc
         @cpus = makeCpus(prices, names, shipping_price, descHash)                     
-    end #end initialize
+    end 
 
     def getCpuDesc
         scraped = NeweggScraperChsbr::Scraper.new
@@ -18,7 +17,10 @@ class NeweggScraperChsbr::DataGrabber
         css_next_link = scraped.xml_obj.css  ".item-title"
         css_next_link.each_with_index do | element, index |
             if index != 0
-                pages << element.attributes["href"].value
+        
+                if element.attributes["href"] != nil
+                    pages << element.attributes["href"].text
+                end
             end
         end
         description = {}
@@ -44,19 +46,19 @@ class NeweggScraperChsbr::DataGrabber
 
 
     end
-    def split_price(html_element)               # This method checks each individual text element, this is to make sure the prices are accurate.
+    def split_price(html_element)              
         counter = 0
         until counter == 100  
-            if counter < 10                     # If the counter is less than 10, is necessary because the computer doesn't know we are working with money.
-                if html_element.text.include?(".0#{counter.to_s}")  #If the text element includes any dollar ammount below .10 is a neccessary check.
-                                                                    #Otherwise the computer would only check [.0.. .9], and we need it to check [.00.. .09]
-                    price = html_element.text.split ".0#{counter.to_s}" #Once we know it's the correct element we can assign it to the price variable.
-                                                                        #This is only necessary to be able to delete the data we are splitting off.
-                                                                        # (We are splitting anything after the cents amount because it was uneccessary.)
+            if counter < 10                    
+                if html_element.text.include?(".0#{counter.to_s}")  
+                                                                   
+                    price = html_element.text.split ".0#{counter.to_s}" 
+                                                                        
+                                                                        
                     price.delete_at 1
-                    return price, ".0#{counter.to_s}"                   # Return the dollar amount, and the cents amount in an array.
+                    return price, ".0#{counter.to_s}"                   
                 end
-            elsif counter >= 10                                     # This does the same as above, but for any number over 9.
+            elsif counter >= 10                                     
                 if html_element.text.include?(".#{counter.to_s}") 
 
                     price = (html_element.text.split ".#{counter.to_s}")
@@ -67,59 +69,35 @@ class NeweggScraperChsbr::DataGrabber
         counter += 1
         end
     end
-    def isCoolerOrMB?(name) # This methods name means is it a cooler or a motherboard?
-        name.include?("Water") || name.include?("Air") || name.include?("Motherboard")  # this will return true if
-                                                                                        # any of the products include
-                                                                                        # words that describe motherboards and/or 
-                                                                                        # cooling products.
+    def isCoolerOrMB?(name) 
+        name.include?("Water") || name.include?("Air") || name.include?("Motherboard")  
     end
     def getPrice
         scraped_info = NeweggScraperChsbr::Scraper.new
-        css_price = scraped_info.xml_obj.css ".price-current"    # This will set the variable equal to the
-                                                            # html that contains what I need to find the price.
+        css_price = scraped_info.xml_obj.css ".price-current"    
 
-        prices = []                                         # This will hold all of the prices in an array.
+        prices = []                                        
 
-        css_price.each do | piece |                         # Going 1 level deep into the html obj that contains the price text element.
-
-            temp_price = split_price piece                  # split_price will split the price, and return
-                                                            # two variables in an array. The first element of
-                                                            # the array will be the dollar amount.
-                                                            # The second element will be the cent ammount because
-                                                            # I deemed it easier to remove anything after the
-                                                            # floating point, it was the only pattern that was
-                                                            # consistent.
-
+        css_price.each do | piece |                        
+            temp_price = split_price piece                 
             if temp_price != nil
-                temp_price.flatten!                             # When returned by #split_price the dollar amount is
-                                                                # nested inside of another array. I use flatten!
-                                                                # to return the flattened array to temp_price.
-
-                prices << "#{temp_price[0]}#{temp_price[1]}"    # Here prices is being shoveled the 
-                                                                # two elements, concatenated to create
-                                                                # a string similar to "$00.00"
+                temp_price.flatten!                             
+                prices << "#{temp_price[0]}#{temp_price[1]}"    
             end
 
-        end #end prices.each
+        end 
         prices
     end
     def getNames
         scraped = NeweggScraperChsbr::Scraper.new
-        names = []                                          # Names will hold the names of 
-                                                            # objects found on the page.
+        names = []                                          
 
-        css_name = scraped.xml_obj.css ".item-title"        # css_name will hold the html 
-                                                            # object to be enumerated upon.
+        css_name = scraped.xml_obj.css ".item-title"       
 
-        css_name.each_with_index do | name, index |         # css_name will be enumerated upon
-                                                            # to retrieve the strings.
+        css_name.each_with_index do | name, index |        
 
-            index != 0 ? names << name.text : nil           # I have to skip the first name
-                                                            # because it does not have a price.
-                                                            # After I skip the first name
-                                                            # I will shovel the text from the 
-                                                            # html object into the names array.
-        end #end names.each_with_index
+            index != 0 ? names << name.text : nil           
+        end 
         names
     end
     def getShipping
@@ -136,23 +114,13 @@ class NeweggScraperChsbr::DataGrabber
                                               
                                                             
         cpus = []                                                    
-        prices.each_with_index do | price, index |          # I will then enumerate on
-                                                            # each of the prices with their
-                                                            # index so that the enumation can
-                                                            # access the names array at the
-                                                            # same time.
+        prices.each_with_index do | price, index |         
 
-            if !isCoolerOrMB?(names[index])                 # Here the program check if
-                                                            # the name is a cooler
-                                                            # or motherboard because
-                                                            # there is a price associated
-                                                            # with the coolers on the
-                                                            # website.
-                
+            if !isCoolerOrMB?(names[index])                
                 cpus << NeweggScraperChsbr::Cpu.new(names[index], price, shipping[index], desc_hash[index])      
                                                             
-            end #end if
-        end #end prices.each_with_index
+            end 
+        end 
         cpus
     end
 end
