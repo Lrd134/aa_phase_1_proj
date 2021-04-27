@@ -1,4 +1,4 @@
-class NeweggScraperChsbr::CLI
+class NeweggScraperChsbr::Cli
     attr_reader :user
     def initialize
         NeweggScraperChsbr::DataGrabber.new
@@ -19,11 +19,13 @@ class NeweggScraperChsbr::CLI
             get_init_data_for_user
             printed_cpus = NeweggScraperChsbr::Cpu.display_cpu(@user)
 
-
-            @user.choose_cpu(printed_cpus)
+            if printed_cpus.size != 0
+                @user.choose_cpu(printed_cpus)
+                NeweggScraperChsbr::Cpu.display_cpu_with_extras(@user)
+            end
     
             
-            NeweggScraperChsbr::Cpu.display_cpu_with_extras(@user)
+            
             puts "If you would like to restart the program please enter : #{@counter}.\nTo exit type n or exit."
             @counter = gets.strip
             corr_input = control_bool
@@ -125,4 +127,35 @@ class NeweggScraperChsbr::CLI
         end
 
     end
+        # def choose_cpu(printed_cpus)
+    #     puts "Please enter the number of the CPU you'd like to see more about."
+    #     chosen = gets.strip
+    #     while !is_numeric?(chosen)
+    #         puts "Please enter the number of the CPU you'd like to see more about."
+    #         chosen = gets.strip
+    #     end
+    #     if !printed_cpus.include?(chosen.to_i)
+    #         puts "You chose a CPU outside of your budget please choose another."
+    #         choose_cpu(printed_cpus)
+    #     end
+    #     @user.chosen_cpu << chosen.to_i
+    #     puts "Would you like to see more about another CPU?\nEnter y to do so.\nEnter n to see details about the chosen CPU(s)"
+    #         input = gets.strip
+            
+    #     if input == 'y'
+    #         choose_cpu(printed_cpus)
+    #     end
+        
+    # end
+    # def is_numeric?(obj) 
+    #     obj.match(/\A[^+-]?\d+?(\^.\d+)?\Z/) == nil ? false : true
+    #  end
+    #  def self.display_cpu_with_extras(user)
+        
+    #     user.chosen_cpu.each do | chosen_cpu |
+
+    #         puts "\n\n\n#{NeweggScraperChsbr::Cpu.all[chosen_cpu - 1].name.name}\nHas a price of: #{NeweggScraperChsbr::Cpu.all[chosen_cpu - 1].price.price}\nShipping: #{NeweggScraperChsbr::Cpu.all[chosen_cpu - 1].shipping.price}\n\n   Descriptive Points:\n"
+    #         NeweggScraperChsbr::Cpu.all[chosen_cpu - 1].printDesc
+    #     end
+    # end
 end

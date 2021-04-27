@@ -59,12 +59,13 @@ class NeweggScraperChsbr::Cpu
                     puts("\n  #{counter}:\n     Name: #{computer.name.name}\n     Price: #{computer.price.price}")
                     printed_cpus << counter
 
-            elsif printed_cpus.size == 0
-                puts "You did not match any CPU criteria."
             end
 
             counter += 1
             
+        end
+        if printed_cpus.size == 0
+            puts "You did not match any CPU criteria."
         end
         printed_cpus
 

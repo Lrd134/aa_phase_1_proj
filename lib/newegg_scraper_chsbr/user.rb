@@ -7,6 +7,7 @@ class NeweggScraperChsbr::User
         @max_price = max_price
         @chosen_cpu = []
     end
+
     def choose_cpu(printed_cpus)
         puts "Please enter the number of the CPU you'd like to see more about."
         chosen = gets.strip
