@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    newegg_scraper_chsbr (0.2.2)
+    newegg_scraper_chsbr (0.2.3)
       nokogiri (~> 1.11.3)
       open-uri (~> 0.1)
 

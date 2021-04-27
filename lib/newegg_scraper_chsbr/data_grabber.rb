@@ -70,7 +70,7 @@ class NeweggScraperChsbr::DataGrabber
         end
     end
     def isCoolerOrMB?(name) 
-        name.include?("Water") || name.include?("Air") || name.include?("Motherboard") || name.include?("AIO") || name.include?("FLY")
+        name.include?("Water") || name.include?("Air") || name.include?("Motherboard") || name.include?("AIO") || name.include?("FLY") || name.include?("Cooler")
     end
     def getPrice
         scraped_info = NeweggScraperChsbr::Scraper.new
@@ -117,7 +117,7 @@ class NeweggScraperChsbr::DataGrabber
         prices.each_with_index do | price, index |         
 
             if !isCoolerOrMB?(names[index])                
-                cpus << NeweggScraperChsbr::Cpu.new(names[index], price, shipping[index], desc_hash[index])      
+                cpus << NeweggScraperChsbr::Cpu.new(names[index], prices[index - 1], shipping[index], desc_hash[index])      
                                                             
             end 
         end 
