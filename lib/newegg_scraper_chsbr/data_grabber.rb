@@ -70,7 +70,7 @@ class NeweggScraperChsbr::DataGrabber
         end
     end
     def isCoolerOrMB?(name) 
-        name.include?("Water") || name.include?("Air") || name.include?("Motherboard") || name.include?("AIO") || name.include?("FLY") || name.include?("Cooler")
+        name.include?("Water") || name.include?("Air") || name.include?("Motherboard") || name.include?("AIO") || name.include?("FLY") || name.include?("Cooler") || name.include?("Block")
     end
     def getPrice
         scraped_info = NeweggScraperChsbr::Scraper.new

@@ -28,6 +28,9 @@ class NeweggScraperChsbr::User
         end
         
     end
+    def clear_chosen
+        @chosen_cpu = []
+    end
     def is_numeric?(obj) 
         obj.match(/\A[^+-]?\d+?(\^.\d+)?\Z/) == nil ? false : true
      end

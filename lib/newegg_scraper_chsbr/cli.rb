@@ -7,12 +7,12 @@ class NeweggScraperChsbr::Cli
         puts "Were you interested in purchasing some CPU's?"
         puts "Please enter y to do so."  
         @counter = gets.strip
-        corr_input = control_bool
-        while corr_input
+        incorrect_input = control_bool
+        while incorrect_input
             puts "Were you interested in purchasing some CPU's?"
             puts "Please enter y to do so.\nPlease enter n or exit to quit."  
             @counter = gets.strip
-            corr_input = control_bool
+            incorrect_input = control_bool
         end
         while @counter == 'y'
             get_price_range
@@ -28,14 +28,16 @@ class NeweggScraperChsbr::Cli
             
             puts "If you would like to restart the program please enter : #{@counter}.\nTo exit type n or exit."
             @counter = gets.strip
-            corr_input = control_bool
-            while corr_input
+            incorrect = control_bool
+            while incorrect
                 puts "Were you interested in purchasing some CPU's?"
                 puts "Please enter y to do so.\nPlease enter n or exit to quit."  
                 @counter = gets.strip
-                corr_input = control_bool
+                incorrect = control_bool
             end
-            
+            clear_vars
+            @user.clear_chosen
+            self.call    
         end
         puts "Thanks for using Chesbro's Scraper!"
     end
@@ -102,30 +104,26 @@ class NeweggScraperChsbr::Cli
         end
     end
     def control_bool
-        if @counter.include?("y")
+        if @counter == "y"
             false
-        elsif @counter.include?("exit")
-            false
-        elsif @counter.include?("n") 
+        elsif @counter == "exit" || @counter == "n" 
             false
         else
             true
         end
     end
     def cpu_make_bool
-        if @cpu_make.include?("x")
-            @cpu_make = "x"
-            false
-        elsif @cpu_make.include?("a")
-            @cpu_make = "a"
-            false
-        elsif @cpu_make.include?("i")
-            @cpu_make = "i"
+        if @cpu_make == "x" || @cpu_make == "a" || @cpu_make == "i"
             false
         else
             true
         end
 
+    end
+    def clear_vars
+        @cpu_make = nil
+        @min_price = nil
+        @max_price = nil
     end
         # def choose_cpu(printed_cpus)
     #     puts "Please enter the number of the CPU you'd like to see more about."
